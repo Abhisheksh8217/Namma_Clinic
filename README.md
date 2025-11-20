@@ -11,9 +11,9 @@
 - 👨‍⚕️ **Patient & Admin Portals**
 
 
-## Live Demo
-    **Netlify Deployed sample for frontend only**:https://691ea200b8c7f0e40bc0d230--benevolent-pavlova-5f5b8d.netlify.app/
-🌐 **Website:** [https://namma-clinic.onrender.com](https://namma-clinic.onrender.com)
+## Live Demo  (Netlify Deployed sample for frontend only) :
+    Netlify Deployed sample for frontend only :
+🌐 **Website:** [https://691ea200b8c7f0e40bc0d230--benevolent-pavlova-5f5b8d.netlify.app/]
 
 ## Clinic Details
 - **Doctor:** Dr. PRABHU CHANDRA N.M (General Physician)
