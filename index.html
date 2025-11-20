@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namma Clinic - Professional Healthcare Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --success-color: #22c55e;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .brand-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .brand-text p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+        /* Service Cards */
+        .service-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .service-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Department Cards */
+        .department-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .department-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .department-card.selected {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        /* Doctor Cards */
+        .doctor-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .doctor-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .availability-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+        }
+
+        .available { background: var(--success-color); }
+        .busy { background: var(--danger-color); }
+        .offline { background: var(--text-secondary); }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Status Badges */
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+
+        /* Tables */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--light-color);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        tr:hover {
+            background: var(--light-color);
+        }
+
+        /* Messages */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+
+
+        /* Health Tips */
+        .health-tip {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        /* Emergency Button */
+        .emergency-btn {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            animation: pulse 2s infinite;
+            z-index: 1500;
+            transition: all 0.3s ease;
+        }
+        
+        .emergency-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: #dc2626;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Dark Mode */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--dark-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Emergency Button -->
+    <button class="emergency-btn" onclick="emergencyCall()">
+        <i class="fas fa-phone-alt"></i> Emergency
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-hospital"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Namma Clinic</h1>
+                    <p>Professional Healthcare Management</p>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a class="nav-item active" onclick="showSection('dashboard')">🏠 Dashboard</a>
+
+                <a class="nav-item" onclick="showSection('doctors')">👨‍⚕️ Doctor</a>
+                <a class="nav-item" onclick="showSection('appointment')">📅 Book Appointment</a>
+
+                <a class="nav-item" onclick="showSection('ai-symptom-checker')">🤖 AI Symptom Checker</a>
+                <a class="nav-item" onclick="showSection('report-summary')">📄 Report Summary</a>
+                <a class="nav-item" onclick="showSection('health-tips')">💡 Health Tips</a>
+                <a class="nav-item" onclick="showSection('patient-login')">👤 Patient Login</a>
+                <a class="nav-item" onclick="showSection('admin')">🔐 Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section active">
+            <!-- Clinic Info -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h2 class="card-title">About Namma Clinic</h2>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <h3>Our Mission</h3>
+                        <p>To provide accessible, quality healthcare services to all citizens through the Government of Karnataka's Namma Clinic initiative. We are committed to delivering comprehensive medical care with compassion and excellence.</p>
+                        
+                        <h3 style="margin-top: 1.5rem;">Our Facilities</h3>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>✅ Modern diagnostic equipment</li>
+                            <li>✅ Digital health records</li>
+                            <li>✅ Pharmacy services</li>
+                            <li>✅ Emergency care</li>
+                            <li>✅ Vaccination center</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Working Hours</h3>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-top: 0.5rem;">
+                            <p><strong>Monday - Saturday:</strong> 9:00 AM - 4:00 PM</p>
+                            <p><strong>Sunday:</strong> Closed</p>
+                            <p><strong>Emergency:</strong> 24/7 Available</p>
+                        </div>
+
+                        <h3 style="margin-top: 1.5rem;">Our Location</h3>
+                        <div style="background: #f0f9ff; padding: 1rem; border-radius: 8px; margin-top: 0.5rem; border-left: 4px solid var(--primary-color);">
+                            <p style="margin-bottom: 0.5rem;"><strong>Namma Clinic</strong></p>
+                            <p style="margin-bottom: 0.5rem;">97, 4th Main Rd, 2nd Block,<br>Govindaraja Nagar Ward,<br>Canara Bank Colony, Vijayanagar,<br>Bengaluru, Karnataka 560072</p>
+                            <button class="btn btn-primary" onclick="openLocation()" style="margin-top: 0.5rem;">
+                                <i class="fas fa-map-marker-alt"></i> Get Directions
+                            </button>
+                        </div>
+
+                        <h3 style="margin-top: 1.5rem;">Quick Stats</h3>
+                        <div class="grid-2" style="margin-top: 0.5rem;">
+                            <div style="text-align: center; background: #eff6ff; padding: 1rem; border-radius: 8px;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">500+</div>
+                                <div>Patients Served</div>
+                            </div>
+                            <div style="text-align: center; background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--success-color);">98%</div>
+                                <div>Satisfaction Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Health Tip -->
+            <div class="health-tip">
+                <h3><i class="fas fa-lightbulb"></i> Today's Health Tip</h3>
+                <p id="daily-health-tip">Drink at least 8 glasses of water daily to keep your body hydrated and maintain optimal health. Proper hydration helps in digestion, circulation, and temperature regulation.</p>
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Doctors Section -->
+        <div id="doctors" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h2 class="card-title">Our Doctor</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Dr. PRABHU CHANDRA N.M</h3>
+                        <p style="color: var(--primary-color); font-weight: 500;">General Physician</p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">M.B.B.S • 15+ years experience</p>
+                        <div style="margin: 1rem 0;">
+                            <span class="badge badge-success">Available</span>
+                            <div class="availability-indicator available"></div>
+                        </div>
+                        <p style="font-size: 0.875rem;">Specializes in: General Medicine, Diabetes, Hypertension, Pediatrics, Gynecology, All Medical Conditions</p>
+                        <button class="btn btn-primary" style="margin-top: 1rem;" onclick="navigateToAppointment()">
+                            Book Appointment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointment Booking Section -->
+        <div id="appointment" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <h2 class="card-title">Book Appointment</h2>
+                </div>
+                
+                <!-- Step 1: Select Date & Time -->
+                <div id="step1" class="booking-step">
+                    <h3>Step 1: Select Date & Time</h3>
+                    <div class="form-grid" style="margin-top: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Select Date</label>
+                            <input type="date" class="form-input" id="appointment-date" min="">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Available Time Slots</label>
+                            <div id="time-slots" class="grid-4">
+                                <!-- Time slots will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Patient Details -->
+                <div id="step2" class="booking-step hidden">
+                    <h3>Step 2: Patient Details</h3>
+                    <form id="appointment-form" class="form-grid" style="margin-top: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-input" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-input" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Age *</label>
+                            <input type="number" class="form-input" name="age" required min="1" max="120">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label class="form-label">Reason for Visit</label>
+                            <textarea class="form-input" name="reason" rows="3" placeholder="Brief description of your symptoms or reason for visit"></textarea>
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calendar-check"></i> Confirm Appointment
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetBooking()" style="margin-left: 1rem;">
+                                Start Over
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="appointment-message"></div>
+            </div>
+        </div>
+
+
+
+        <!-- AI Symptom Checker Section -->
+        <div id="ai-symptom-checker" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h2 class="card-title">AI Symptom Checker</h2>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #f59e0b;">
+                    <p><strong>⚠️ Important:</strong> This AI tool provides guidance only. Always consult Dr. PRABHU CHANDRA N.M for proper diagnosis and treatment.</p>
+                </div>
+                
+                <form id="symptom-form" class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Describe Your Symptoms *</label>
+                        <textarea class="form-input" name="symptoms" rows="4" placeholder="Example: I have fever, headache, and body pain for 2 days..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Age *</label>
+                        <input type="number" class="form-input" name="age" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender *</label>
+                        <select class="form-input" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Analyze Symptoms
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="symptom-result" class="hidden" style="margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 12px; border-left: 4px solid var(--primary-color);">
+                    <h3><i class="fas fa-stethoscope"></i> AI Analysis Result</h3>
+                    <div id="symptom-analysis"></div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px;">
+                        <p><strong>📞 Next Step:</strong> Book an appointment with Dr. PRABHU CHANDRA N.M for proper diagnosis.</p>
+                        <button class="btn btn-success" onclick="navigateToAppointment()" style="margin-top: 0.5rem;">
+                            <i class="fas fa-calendar-plus"></i> Book Appointment Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Report Summary Section -->
+        <div id="report-summary" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h2 class="card-title">Medical Report Summarizer</h2>
+                </div>
+                
+                <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #22c55e;">
+                    <p><strong>💡 How it works:</strong> Upload a photo/PDF of your medical report or type the text manually. Our AI will extract text and create an easy-to-understand summary.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9em; color: #059669;"><strong>Supported:</strong> JPG, PNG images and PDF files</p>
+                </div>
+                
+                <!-- Upload Options -->
+                <div class="grid-2" style="margin-bottom: 2rem;">
+                    <div style="text-align: center; padding: 1.5rem; border: 2px dashed var(--border-color); border-radius: 12px; cursor: pointer;" onclick="document.getElementById('file-upload').click()">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3>Upload Report</h3>
+                        <p>Click to upload photo or PDF of your medical report</p>
+                        <input type="file" id="file-upload" accept="image/*,.pdf" style="display: none;" onchange="handleFileUpload(event)">
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem; border: 2px dashed var(--border-color); border-radius: 12px; cursor: pointer;" onclick="showTextInput()">
+                        <i class="fas fa-keyboard" style="font-size: 3rem; color: var(--success-color); margin-bottom: 1rem;"></i>
+                        <h3>Type Text</h3>
+                        <p>Manually type or paste your report text</p>
+                    </div>
+                </div>
+                
+                <!-- Text Input Form (Hidden by default) -->
+                <form id="report-form" class="form-grid" style="display: none;">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label class="form-label">Medical Report Text *</label>
+                        <textarea class="form-input" name="reportText" rows="8" placeholder="Paste your medical report text here... (Lab results, X-ray reports, blood test results, etc.)" required></textarea>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i> Generate Summary
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="hideTextInput()" style="margin-left: 1rem;">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- File Processing Progress -->
+                <div id="ocr-progress" class="hidden"></div>
+                
+                <div id="report-result" class="hidden" style="margin-top: 2rem; padding: 1.5rem; background: #f0fdf4; border-radius: 12px; border-left: 4px solid #22c55e;">
+                    <h3><i class="fas fa-file-alt"></i> Report Summary</h3>
+                    <div id="report-summary-content"></div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px;">
+                        <p><strong>👨⚕️ Recommendation:</strong> Discuss this summary with Dr. PRABHU CHANDRA N.M for detailed explanation.</p>
+                        <button class="btn btn-success" onclick="navigateToAppointment()" style="margin-top: 0.5rem;">
+                            <i class="fas fa-user-md"></i> Consult Doctor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Tips Section -->
+        <div id="health-tips" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h2 class="card-title">Health Tips & Wellness</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="health-tip">
+                        <h3><i class="fas fa-heart"></i> Heart Health</h3>
+                        <p>Regular exercise for at least 30 minutes daily can significantly reduce the risk of heart disease. Include walking, swimming, or cycling in your routine.</p>
+                    </div>
+                    <div class="health-tip">
+                        <h3><i class="fas fa-apple-alt"></i> Nutrition</h3>
+                        <p>Eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins. Limit processed foods and sugar intake for better health.</p>
+                    </div>
+                    <div class="health-tip">
+                        <h3><i class="fas fa-bed"></i> Sleep Hygiene</h3>
+                        <p>Aim for 7-9 hours of quality sleep each night. Maintain a consistent sleep schedule and create a relaxing bedtime routine.</p>
+                    </div>
+                    <div class="health-tip">
+                        <h3><i class="fas fa-shield-alt"></i> Prevention</h3>
+                        <p>Regular health check-ups and vaccinations are essential for preventing diseases. Don't skip your annual health screenings.</p>
+                    </div>
+                </div>
+
+                <!-- Medicine Reminder Tool -->
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #f8fafc; border-radius: 12px;">
+                    <h3><i class="fas fa-pills"></i> Medicine Reminder Tool</h3>
+                    <p>Set reminders for your medications to ensure you never miss a dose.</p>
+                    <div class="form-grid" style="margin-top: 1rem;">
+                        <input type="text" class="form-input" placeholder="Medicine Name" id="medicine-name">
+                        <input type="time" class="form-input" id="medicine-time">
+                        <button class="btn btn-primary" onclick="setReminder()">
+                            <i class="fas fa-bell"></i> Set Reminder
+                        </button>
+                    </div>
+                    <div id="medicine-reminders" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Login Section -->
+        <div id="patient-login" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2 class="card-title">Patient Portal</h2>
+                </div>
+                <form id="patient-login-form" class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" name="phone" required>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+                </form>
+                <div id="patient-message"></div>
+
+                <!-- Patient Dashboard -->
+                <div id="patient-dashboard" class="hidden" style="margin-top: 2rem;">
+                    <h3 id="patient-welcome">My Appointments</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Doctor</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patient-appointments">
+                                <tr>
+                                    <td colspan="6" style="text-align: center;">No appointments found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Section -->
+        <div id="admin" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2 class="card-title">Admin Portal</h2>
+                </div>
+                <form id="admin-login-form" class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-input" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" name="password" required>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Admin Login
+                        </button>
+                    </div>
+                </form>
+                <div id="admin-message"></div>
+
+                <!-- Admin Dashboard -->
+                <div id="admin-dashboard" class="hidden" style="margin-top: 2rem;">
+                    
+                    <!-- WhatsApp Notification Panel -->
+                    <div class="card" style="margin-bottom: 2rem; background: linear-gradient(135deg, #25d366, #128c7e); color: white;">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3 class="card-title">WhatsApp Notifications</h3>
+                        </div>
+                        <div class="grid-3">
+                            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);" onclick="sendBulkWhatsApp()">
+                                <i class="fab fa-whatsapp"></i> Send to All Patients
+                            </button>
+                            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);" onclick="sendHealthTip()">
+                                <i class="fas fa-lightbulb"></i> Send Health Tip
+                            </button>
+                            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);" onclick="sendClinicUpdate()">
+                                <i class="fas fa-bullhorn"></i> Clinic Update
+                            </button>
+                        </div>
+                    </div>
+
+                    <h3>All Appointments</h3>
+                    <button class="btn btn-primary" onclick="loadAppointments()" style="margin-bottom: 1rem;">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Patient</th>
+                                    <th>Phone</th>
+                                    <th>Department</th>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-appointments">
+                                <tr>
+                                    <td colspan="9" style="text-align: center;">Loading appointments...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div style="text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success-color); margin-bottom: 1rem;"></i>
+                <h2>Success!</h2>
+                <p id="success-message">Your appointment has been booked successfully.</p>
+                <button class="btn btn-primary" onclick="closeModal()" style="margin-top: 1rem;">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedDepartment = '';
+        let selectedDoctor = '';
+        let selectedDate = '';
+        let selectedTime = '';
+        let currentStep = 1;
+        
+        // Appointment database
+        let appointments = {};
+        
+        // Session state
+        let sessionState = {
+            adminLoggedIn: false,
+            patientLoggedIn: false,
+            currentPatientPhone: '',
+            currentSection: 'dashboard'
+        };
+        
+        // Test save function
+        window.testSave = async function() {
+            console.log('Testing save function...');
+            await saveAppointmentsToFile();
+        };
+        
+        // Load appointments from server
+        async function loadAppointmentsFromFile() {
+            try {
+                const response = await fetch('/api/appointments?t=' + Date.now());
+                if (response.ok) {
+                    const data = await response.json();
+                    appointments = (data && typeof data === 'object' && !Array.isArray(data)) ? data : {};
+                    console.log('Loaded appointments from server:', Object.keys(appointments).length, 'appointments');
+                } else {
+                    throw new Error(`Failed to load appointments: ${response.status}`);
+                }
+            } catch (error) {
+                console.log('Error loading from server, trying localStorage:', error);
+                // Try localStorage fallback
+                const stored = localStorage.getItem('appointments');
+                if (stored) {
+                    try {
+                        const localData = JSON.parse(stored);
+                        appointments = localData;
+                        console.log('Loaded appointments from localStorage:', Object.keys(appointments).length, 'appointments');
+                        
+                        // Try to save localStorage data back to server
+                        try {
+                            await saveAppointmentsToFile();
+                            console.log('Restored localStorage data to server');
+                        } catch (saveError) {
+                            console.error('Could not restore localStorage data to server:', saveError);
+                        }
+                    } catch (e) {
+                        console.log('Error parsing localStorage data:', e);
+                        appointments = {};
+                    }
+                } else {
+                    console.log('No stored data found, starting with empty appointments');
+                    appointments = {};
+                }
+            }
+        }
+        
+        // Save appointments to server
+        async function saveAppointmentsToFile() {
+            console.log('Saving appointments:', Object.keys(appointments).length, 'total appointments');
+            
+            // Always save to localStorage first
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+            console.log('Saved to localStorage');
+            
+            try {
+                const response = await fetch('/api/save-appointments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    },
+                    body: JSON.stringify(appointments)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Server save result:', result);
+                    if (result.success) {
+                        console.log('✓ Successfully saved to server database');
+                        return true;
+                    } else {
+                        console.error('✗ Server save failed:', result.error);
+                        return false;
+                    }
+                } else {
+                    console.error('✗ HTTP error:', response.status, response.statusText);
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error('✗ Network error saving to server:', error);
+                return false;
+            }
+        }
+        
+        // Save session state
+        function saveSessionState() {
+            localStorage.setItem('sessionState', JSON.stringify(sessionState));
+        }
+        
+        // Load session state
+        function loadSessionState() {
+            const stored = localStorage.getItem('sessionState');
+            if (stored) {
+                try {
+                    sessionState = JSON.parse(stored);
+                } catch (e) {
+                    console.log('Error parsing session state');
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load session state
+            loadSessionState();
+            
+            // Load appointments from file
+            await loadAppointmentsFromFile();
+            
+            // Restore session state
+            restoreSessionState();
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointment-date').min = today;
+            
+            // Rotate health tips
+            rotateHealthTips();
+            setInterval(rotateHealthTips, 24 * 60 * 60 * 1000); // Daily
+            
+            // Load time slots for appointment booking
+            loadTimeSlots();
+            
+            // Add keyboard shortcut for emergency (Ctrl+E or Cmd+E)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+                    e.preventDefault();
+                    emergencyCall();
+                }
+            });
+        });
+        
+        // Restore session state after page load
+        function restoreSessionState() {
+            // Restore current section
+            if (sessionState.currentSection) {
+                showSection(sessionState.currentSection);
+            }
+            
+            // Restore admin login
+            if (sessionState.adminLoggedIn) {
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                loadAppointments();
+            }
+            
+            // Restore patient login
+            if (sessionState.patientLoggedIn && sessionState.currentPatientPhone) {
+                const appointment = appointments[sessionState.currentPatientPhone];
+                if (appointment) {
+                    document.getElementById('patient-dashboard').classList.remove('hidden');
+                    document.getElementById('patient-welcome').textContent = `Welcome, ${appointment.name} - My Appointments`;
+                    updatePatientAppointmentView(sessionState.currentPatientPhone);
+                }
+            }
+        }
+
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            
+            // Save current section
+            sessionState.currentSection = sectionId;
+            saveSessionState();
+        }
+        
+        function navigateToAppointment() {
+            // Show appointment section
+            showSection('appointment');
+            
+            // Update navigation highlight
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[onclick="showSection(\'appointment\')"]').classList.add('active');
+        }
+
+        // Department selection
+        function selectDepartment(dept) {
+            document.querySelectorAll('.department-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.department-card').classList.add('selected');
+        }
+
+        // Initialize booking with Dr. Prabhu Chandra
+        selectedDepartment = 'general';
+        selectedDoctor = 'Dr. PRABHU CHANDRA N.M';
+
+        function loadTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots');
+            const slots = ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM'];
+            
+            timeSlotsContainer.innerHTML = slots.map(time => `
+                <button type="button" class="btn btn-outline" onclick="selectTime('${time}')" style="margin: 0.25rem;">
+                    ${time}
+                </button>
+            `).join('');
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            document.querySelectorAll('#time-slots button').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            });
+            event.target.classList.remove('btn-outline');
+            event.target.classList.add('btn-primary');
+            
+            setTimeout(() => {
+                showStep(2);
+            }, 500);
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.booking-step').forEach(stepDiv => {
+                stepDiv.classList.add('hidden');
+            });
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            currentStep = step;
+        }
+
+        function resetBooking() {
+            selectedDepartment = 'general';
+            selectedDoctor = 'Dr. PRABHU CHANDRA N.M';
+            selectedDate = '';
+            selectedTime = '';
+            currentStep = 1;
+            showStep(1);
+            document.getElementById('appointment-form').reset();
+            document.getElementById('appointment-date').value = '';
+            loadTimeSlots();
+        }
+
+        // Form submissions
+        document.getElementById('appointment-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const appointmentDate = document.getElementById('appointment-date').value;
+            
+            // Validate required fields
+            if (!appointmentDate) {
+                showAlert('Please select an appointment date.', 'error');
+                return;
+            }
+            
+            if (!selectedTime) {
+                showAlert('Please select an appointment time.', 'error');
+                return;
+            }
+            
+            const formData = new FormData(e.target);
+            const appointmentData = {
+                name: formData.get('name').trim(),
+                phone: formData.get('phone').trim(),
+                email: formData.get('email') || '',
+                age: formData.get('age') || '',
+                reason: formData.get('reason') || '',
+                date: appointmentDate,
+                time: selectedTime
+            };
+            
+            // Additional validation
+            if (!appointmentData.name || !appointmentData.phone) {
+                showAlert('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            // Add to local appointments using phone as key
+            appointments[appointmentData.phone] = {
+                name: appointmentData.name,
+                phone: appointmentData.phone,
+                date: appointmentData.date,
+                time: appointmentData.time,
+                status: 'Pending',
+                email: appointmentData.email,
+                age: appointmentData.age,
+                reason: appointmentData.reason
+            };
+            
+            try {
+                // Save to server
+                await saveAppointmentsToFile();
+                
+                // Automatically send WhatsApp notification
+                sendWhatsAppNotificationAuto(appointmentData.phone, appointmentData.name, appointmentData.date, appointmentData.time, 'Pending');
+                
+                document.getElementById('success-message').textContent = 
+                    `Your appointment with Dr. PRABHU CHANDRA N.M has been booked for ${appointmentData.date} at ${appointmentData.time}. WhatsApp confirmation sent!`;
+                document.getElementById('success-modal').classList.add('show');
+                
+                resetBooking();
+            } catch (error) {
+                console.error('Error saving appointment:', error);
+                showAlert('Error booking appointment. Please try again.', 'error');
+            }
+        });
+
+        // Patient login
+        document.getElementById('patient-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const phone = formData.get('phone');
+            
+            // Find appointments for this phone number
+            const patientAppointments = Object.values(appointments).filter(apt => apt.phone === phone);
+            
+            if (patientAppointments.length > 0) {
+                const latestAppointment = patientAppointments[patientAppointments.length - 1];
+                
+                document.getElementById('patient-dashboard').classList.remove('hidden');
+                document.getElementById('patient-welcome').textContent = `Welcome, ${latestAppointment.name} - My Appointments`;
+                
+                // Save patient login state
+                sessionState.patientLoggedIn = true;
+                sessionState.currentPatientPhone = phone;
+                saveSessionState();
+                
+                updatePatientAppointmentView(phone);
+                showAlert('Login successful!', 'success');
+            } else {
+                showAlert('Only patients with appointments can login. Please book an appointment first.', 'error');
+            }
+        });
+
+        // Admin login
+        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            if (formData.get('username') === 'admin' && formData.get('password') === '1234') {
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                // Load appointments from current data
+                loadAppointments();
+                
+                // Save admin login state
+                sessionState.adminLoggedIn = true;
+                saveSessionState();
+                
+                showAlert('Admin login successful!', 'success');
+            } else {
+                showAlert('Invalid credentials!', 'error');
+            }
+        });
+
+        // Utility functions
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(alertDiv);
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.remove('show');
+        }
+
+        function loadAppointments() {
+            // Load appointments from database
+            let appointmentRows = '';
+            let displayId = 1;
+            
+            // Sort appointments by creation date (newest first)
+            const sortedAppointments = Object.entries(appointments).sort((a, b) => {
+                const dateA = new Date(a[1].createdAt || '2024-01-01');
+                const dateB = new Date(b[1].createdAt || '2024-01-01');
+                return dateB - dateA;
+            });
+            
+            for (const [appointmentId, appointment] of sortedAppointments) {
+                const statusBadge = appointment.status === 'Confirmed' ? 'badge-success' : 
+                                   appointment.status === 'Pending' ? 'badge-warning' :
+                                   appointment.status === 'Rescheduled' ? 'badge-warning' : 'badge-danger';
+                
+                const actionButton = appointment.status === 'Pending' ? 
+                    `<button class="btn btn-success" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="confirmAppointment(this, '${appointmentId}')">Confirm</button>` :
+                    appointment.status === 'Confirmed' ? 
+                    `<button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" disabled>Confirmed</button>` :
+                    `<span style="color: #64748b;">${appointment.status}</span>`;
+                
+                const whatsappButton = `<button class="btn" style="background: #25d366; color: white; padding: 0.25rem 0.5rem; font-size: 0.75rem; margin-left: 0.25rem;" onclick="sendWhatsAppNotification('${appointment.phone}', '${appointment.name}', '${appointment.date}', '${appointment.time}', '${appointment.status}')" title="Send WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
+                
+                appointmentRows += `
+                    <tr data-appointment-id="${appointmentId}">
+                        <td>${displayId}</td>
+                        <td>${appointment.name}</td>
+                        <td>${appointment.phone}</td>
+                        <td>General Medicine</td>
+                        <td>Dr. PRABHU CHANDRA N.M</td>
+                        <td>${appointment.date}</td>
+                        <td>${appointment.time}</td>
+                        <td><span class="badge ${statusBadge}">${appointment.status}</span></td>
+                        <td>${actionButton}${whatsappButton}</td>
+                    </tr>
+                `;
+                displayId++;
+            }
+            
+            document.getElementById('admin-appointments').innerHTML = appointmentRows || `
+                <tr>
+                    <td colspan="9" style="text-align: center;">No appointments found</td>
+                </tr>
+            `;
+        }
+        
+        async function confirmAppointment(button, appointmentId) {
+            const row = button.closest('tr');
+            const statusCell = row.cells[7];
+            
+            // Update local data immediately
+            if (appointments[appointmentId]) {
+                appointments[appointmentId].status = 'Confirmed';
+                
+                const appointment = appointments[appointmentId];
+                
+                try {
+                    // Save to server
+                    await saveAppointmentsToFile();
+                    
+                    // Automatically send WhatsApp confirmation
+                    sendWhatsAppNotificationAuto(appointment.phone, appointment.name, appointment.date, appointment.time, 'Confirmed');
+                    
+                    // Update UI
+                    statusCell.innerHTML = '<span class="badge badge-success">Confirmed</span>';
+                    button.textContent = 'Confirmed';
+                    button.disabled = true;
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-outline');
+                    
+                    // Update patient view if logged in
+                    if (sessionState.patientLoggedIn && sessionState.currentPatientPhone === appointment.phone) {
+                        updatePatientAppointmentView(appointment.phone);
+                    }
+                    
+                    showAlert('Appointment confirmed and WhatsApp sent!', 'success');
+                } catch (error) {
+                    console.error('Error confirming appointment:', error);
+                    showAlert('Error confirming appointment. Please try again.', 'error');
+                }
+            }
+        }
+        
+        function updatePatientAppointmentView(phone) {
+            const appointment = appointments[phone];
+            if (!appointment) return;
+            
+            const statusBadge = appointment.status === 'Confirmed' ? 'badge-success' : 
+                               appointment.status === 'Pending' ? 'badge-warning' :
+                               appointment.status === 'Rescheduled' ? 'badge-warning' : 'badge-danger';
+            
+            document.getElementById('patient-appointments').innerHTML = `
+                <tr id="patient-appointment-1">
+                    <td>${appointment.date}</td>
+                    <td>${appointment.time}</td>
+                    <td>Dr. PRABHU CHANDRA N.M</td>
+                    <td>General Medicine</td>
+                    <td><span class="badge ${statusBadge}">${appointment.status}</span></td>
+                    <td>
+                        ${appointment.status !== 'Cancelled' ? `
+                            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="rescheduleAppointment('${phone}')">Reschedule</button>
+                            <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; margin-left: 0.25rem;" onclick="cancelAppointment('${phone}')">Cancel</button>
+                        ` : '<span style="color: #64748b;">Cancelled</span>'}
+                    </td>
+                </tr>
+            `;
+        }
+        
+        async function rescheduleAppointment(phone) {
+            const newDate = prompt('Enter new date (YYYY-MM-DD):');
+            const newTime = prompt('Enter new time (HH:MM AM/PM):');
+            
+            if (newDate && newTime) {
+                try {
+                    // Update appointment data
+                    if (appointments[phone]) {
+                        appointments[phone].date = newDate;
+                        appointments[phone].time = newTime;
+                        appointments[phone].status = 'Rescheduled';
+                        
+                        // Save to server
+                        await saveAppointmentsToFile();
+                        
+                        // Automatically send WhatsApp notification
+                        sendWhatsAppNotificationAuto(phone, appointments[phone].name, newDate, newTime, 'Rescheduled');
+                        
+                        // Update patient view
+                        updatePatientAppointmentView(phone);
+                        
+                        // Update admin table
+                        loadAppointments();
+                        
+                        showAlert('Appointment rescheduled and WhatsApp sent!', 'success');
+                    }
+                } catch (error) {
+                    console.error('Error rescheduling appointment:', error);
+                    showAlert('Error rescheduling appointment. Please try again.', 'error');
+                }
+            }
+        }
+        
+        async function cancelAppointment(phone) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                try {
+                    // Update appointment data
+                    if (appointments[phone]) {
+                        appointments[phone].status = 'Cancelled';
+                        
+                        // Save to server
+                        await saveAppointmentsToFile();
+                        
+                        // Automatically send WhatsApp notification
+                        sendWhatsAppNotificationAuto(phone, appointments[phone].name, appointments[phone].date, appointments[phone].time, 'Cancelled');
+                        
+                        // Update patient view
+                        updatePatientAppointmentView(phone);
+                        
+                        // Update admin table
+                        loadAppointments();
+                        
+                        showAlert('Appointment cancelled and WhatsApp sent!', 'success');
+                    }
+                } catch (error) {
+                    console.error('Error cancelling appointment:', error);
+                    showAlert('Error cancelling appointment. Please try again.', 'error');
+                }
+            }
+        }
+
+
+
+        function emergencyCall() {
+            // Show emergency options modal
+            showEmergencyModal();
+        }
+        
+        function showEmergencyModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal show';
+            modal.id = 'emergency-modal';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px; border: 3px solid var(--danger-color); box-shadow: 0 20px 60px rgba(239, 68, 68, 0.3);">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--danger-color); margin-bottom: 1rem; animation: pulse 1s infinite;"></i>
+                        <h2 style="color: var(--danger-color);">🚨 Emergency Services</h2>
+                        <p style="margin-bottom: 0.5rem;">Choose the appropriate emergency service:</p>
+                        <small style="color: var(--text-secondary);">Press Ctrl+E for quick access</small>
+                    </div>
+                    <div style="display: grid; gap: 1rem;">
+                        <button class="btn btn-danger emergency-service-btn" onclick="callEmergency('108')" style="padding: 1rem; font-size: 1.1rem; transition: all 0.2s ease;">
+                            <i class="fas fa-ambulance"></i> Medical Emergency - 108
+                        </button>
+                        <button class="btn btn-danger emergency-service-btn" onclick="callEmergency('100')" style="padding: 1rem; font-size: 1.1rem; transition: all 0.2s ease;">
+                            <i class="fas fa-shield-alt"></i> Police - 100
+                        </button>
+                        <button class="btn btn-danger emergency-service-btn" onclick="callEmergency('101')" style="padding: 1rem; font-size: 1.1rem; transition: all 0.2s ease;">
+                            <i class="fas fa-fire"></i> Fire Department - 101
+                        </button>
+                        <button class="btn btn-outline" onclick="closeEmergencyModal()" style="margin-top: 1rem;">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add enhanced styling
+            modal.style.background = 'rgba(0, 0, 0, 0.8)';
+            modal.style.backdropFilter = 'blur(5px)';
+            
+            document.body.appendChild(modal);
+            
+            // Add escape key listener
+            const escapeHandler = function(e) {
+                if (e.key === 'Escape') {
+                    closeEmergencyModal();
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            };
+            document.addEventListener('keydown', escapeHandler);
+        }
+        
+        function callEmergency(number) {
+            const serviceNames = {
+                '108': 'Medical Emergency Services',
+                '100': 'Police',
+                '101': 'Fire Department'
+            };
+            
+            if (confirm(`Calling ${serviceNames[number]} (${number}). This will open your phone dialer.`)) {
+                // Try multiple methods to ensure the call works on different devices
+                try {
+                    // Method 1: Direct tel link
+                    window.location.href = `tel:${number}`;
+                } catch (e) {
+                    try {
+                        // Method 2: Window.open
+                        window.open(`tel:${number}`, '_self');
+                    } catch (e2) {
+                        // Method 3: Create and click a link
+                        const link = document.createElement('a');
+                        link.href = `tel:${number}`;
+                        link.click();
+                    }
+                }
+                
+                // Log the emergency call attempt
+                console.log(`Emergency call initiated to ${number} at ${new Date().toISOString()}`);
+                
+                // Show confirmation message
+                setTimeout(() => {
+                    showAlert(`Emergency call to ${serviceNames[number]} (${number}) initiated. If the call didn't connect, please dial ${number} manually.`, 'success');
+                }, 1000);
+            }
+            
+            closeEmergencyModal();
+        }
+        
+        function closeEmergencyModal() {
+            const modal = document.querySelector('.modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+
+
+        // Medicine reminder
+        function setReminder() {
+            const name = document.getElementById('medicine-name').value;
+            const time = document.getElementById('medicine-time').value;
+            
+            if (!name || !time) {
+                showAlert('Please enter medicine name and time', 'error');
+                return;
+            }
+
+            const remindersContainer = document.getElementById('medicine-reminders');
+            remindersContainer.innerHTML += `
+                <div style="background: white; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>${name}</strong> at ${time}
+                    </div>
+                    <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="this.parentElement.remove()">
+                        Remove
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('medicine-name').value = '';
+            document.getElementById('medicine-time').value = '';
+            
+            showAlert('Medicine reminder set successfully!', 'success');
+        }
+
+        // Location navigation
+        function openLocation() {
+            const address = "Namma Clinic, 97, 4th Main Rd, 2nd Block, Govindaraja Nagar Ward, Canara Bank Colony, Vijayanagar, Bengaluru, Karnataka 560072";
+            const encodedAddress = encodeURIComponent(address);
+            
+            // Try to open in Google Maps app first, then fallback to web
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+            
+            // Open in new tab
+            window.open(googleMapsUrl, '_blank');
+        }
+
+        // AI Symptom Checker
+        document.getElementById('symptom-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const symptoms = formData.get('symptoms');
+            const age = formData.get('age');
+            const gender = formData.get('gender');
+            
+            if (!symptoms || !age || !gender) {
+                showAlert('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Show loading
+            const resultDiv = document.getElementById('symptom-result');
+            const analysisDiv = document.getElementById('symptom-analysis');
+            
+            resultDiv.classList.remove('hidden');
+            analysisDiv.innerHTML = '<div style="text-align: center; padding: 2rem;"><i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-color);"></i><br><br>Analyzing your symptoms...</div>';
+            
+            try {
+                const response = await fetch('/api/check-symptoms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ symptoms, age, gender })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    analysisDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${result.analysis}</pre>`;
+                } else {
+                    analysisDiv.innerHTML = '<p style="color: var(--danger-color);">Error analyzing symptoms. Please try again or consult Dr. PRABHU CHANDRA N.M directly.</p>';
+                }
+            } catch (error) {
+                console.error('Symptom check error:', error);
+                analysisDiv.innerHTML = '<p style="color: var(--danger-color);">Network error. Please check your connection and try again.</p>';
+            }
+        });
+        
+        // File Upload Handler
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const resultDiv = document.getElementById('report-result');
+            const progressDiv = document.getElementById('ocr-progress');
+            
+            resultDiv.classList.remove('hidden');
+            progressDiv.classList.remove('hidden');
+            
+            if (file.type.startsWith('image/')) {
+                // Process image with OCR
+                processImageWithOCR(file);
+            } else if (file.type === 'application/pdf') {
+                // Handle PDF
+                processPDFFile(file);
+            } else {
+                progressDiv.innerHTML = '<div style="color: var(--danger-color); padding: 1rem;"><i class="fas fa-exclamation-triangle"></i> Please upload an image (JPG, PNG) or PDF file.</div>';
+            }
+        }
+        
+        // Show/Hide text input
+        function showTextInput() {
+            document.getElementById('report-form').style.display = 'grid';
+        }
+        
+        function hideTextInput() {
+            document.getElementById('report-form').style.display = 'none';
+            document.getElementById('report-form').reset();
+        }
+        
+        // Process PDF files
+        async function processPDFFile(file) {
+            const progressDiv = document.getElementById('ocr-progress');
+            progressDiv.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--warning-color);"><i class="fas fa-file-pdf" style="font-size: 2rem;"></i><br><br>PDF processing not yet implemented. Please convert to image or type text manually.</div>';
+        }
+        
+        // Medical Report Summarizer (Text Input)
+        document.getElementById('report-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const reportText = formData.get('reportText');
+            
+            if (!reportText || reportText.trim().length < 50) {
+                showAlert('Please enter a medical report with at least 50 characters.', 'error');
+                return;
+            }
+            
+            // Show loading
+            const resultDiv = document.getElementById('report-result');
+            const summaryDiv = document.getElementById('report-summary-content');
+            
+            resultDiv.classList.remove('hidden');
+            summaryDiv.innerHTML = '<div style="text-align: center; padding: 2rem;"><i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--success-color);"></i><br><br>Generating summary...</div>';
+            
+            try {
+                const response = await fetch('/api/summarize-report', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ reportText })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    summaryDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${result.summary}</pre>`;
+                } else {
+                    summaryDiv.innerHTML = '<p style="color: var(--danger-color);">Error generating summary. Please try again or consult Dr. PRABHU CHANDRA N.M directly.</p>';
+                }
+            } catch (error) {
+                console.error('Report summary error:', error);
+                summaryDiv.innerHTML = '<p style="color: var(--danger-color);">Network error. Please check your connection and try again.</p>';
+            }
+        });
+
+        // WhatsApp Notification Functions
+        function sendWhatsAppNotification(phone, name, date, time, status) {
+            // Create WhatsApp message
+            const message = generateWhatsAppMessage(name, date, time, status);
+            
+            // Create WhatsApp link
+            const cleanPhone = phone.replace(/^\+91/, '').replace(/\D/g, '');
+            const whatsappLink = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappLink, '_blank');
+            
+            showAlert(`WhatsApp opened for ${name}`, 'success');
+        }
+        
+        // Automatic WhatsApp notification (server-side)
+        async function sendWhatsAppNotificationAuto(phone, name, date, time, status) {
+            try {
+                const response = await fetch('/api/send-whatsapp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone, name, date, time, status })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log(`✅ WhatsApp sent to ${name} (${phone}) - Status: ${status}`);
+                    showAlert(`WhatsApp message sent to ${name}!`, 'success');
+                } else {
+                    console.error('WhatsApp send failed:', result.error);
+                    // Fallback to manual WhatsApp link
+                    sendWhatsAppNotificationFallback(phone, name, date, time, status);
+                }
+            } catch (error) {
+                console.error('WhatsApp API error:', error);
+                // Fallback to manual WhatsApp link
+                sendWhatsAppNotificationFallback(phone, name, date, time, status);
+            }
+        }
+        
+        // Fallback WhatsApp notification (manual)
+        function sendWhatsAppNotificationFallback(phone, name, date, time, status) {
+            const message = generateWhatsAppMessage(name, date, time, status);
+            const cleanPhone = phone.replace(/^\+91/, '').replace(/\D/g, '');
+            const whatsappLink = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(message)}`;
+            
+            // Show manual option
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.className = 'alert alert-warning';
+            fallbackDiv.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i>
+                Automatic WhatsApp failed. 
+                <button class="btn btn-outline" onclick="window.open('${whatsappLink}', '_blank')" style="margin-left: 1rem;">
+                    <i class="fab fa-whatsapp"></i> Send Manually
+                </button>
+            `;
+            
+            document.body.appendChild(fallbackDiv);
+            setTimeout(() => fallbackDiv.remove(), 10000);
+        }
+        
+        function generateWhatsAppMessage(name, date, time, status) {
+            let emoji = '';
+            let message = '';
+            
+            switch(status) {
+                case 'Pending':
+                    emoji = '⏳';
+                    message = `${emoji} *NAMMA CLINIC - Appointment Booked*\n\nHello ${name}! 👋\n\nYour appointment has been successfully booked:\n\n📅 *Date:* ${date}\n🕐 *Time:* ${time}\n👨⚕️ *Doctor:* Dr. PRABHU CHANDRA N.M\n\n⏳ *Status:* Pending Confirmation\n\n📍 *Address:*\n97, 4th Main Rd, Vijayanagar\nBengaluru - 560072\n\n📞 *Contact:* +91 9448049152\n\nThank you for choosing Namma Clinic! 🏥`;
+                    break;
+                case 'Confirmed':
+                    emoji = '✅';
+                    message = `${emoji} *NAMMA CLINIC - Appointment Confirmed*\n\nHello ${name}! 👋\n\nGreat news! Your appointment is *CONFIRMED* ✅\n\n📅 *Date:* ${date}\n🕐 *Time:* ${time}\n👨⚕️ *Doctor:* Dr. PRABHU CHANDRA N.M\n\n📍 *Location:*\nNamma Clinic, Vijayanagar\nBengaluru - 560072\n\n⏰ Please arrive 15 minutes early\n\n📞 Contact: +91 9448049152\n\nSee you soon! 🏥`;
+                    break;
+                case 'Cancelled':
+                    emoji = '❌';
+                    message = `${emoji} *NAMMA CLINIC - Appointment Cancelled*\n\nHello ${name}! 👋\n\nYour appointment on ${date} at ${time} has been cancelled.\n\n❌ *Status:* Cancelled\n\nTo book a new appointment:\n🌐 Visit: https://namma-clinic.onrender.com\n📞 Call: +91 9448049152\n\nWe apologize for any inconvenience.\n\nThank you! 🏥`;
+                    break;
+            }
+            
+            return message;
+        }
+        
+        function sendBulkWhatsApp() {
+            const message = `🏥 *NAMMA CLINIC - Important Update*\n\nDear Patients,\n\nWe hope you are doing well!\n\n📅 *Clinic Hours:*\nMonday-Saturday: 9 AM - 4 PM\nSunday: Closed\n\n👨⚕️ *Dr. PRABHU CHANDRA N.M*\nGeneral Physician\n\n📞 *Book Appointment:* +91 9448049152\n📍 *Address:* 97, 4th Main Rd, Vijayanagar, Bengaluru\n\nStay healthy! 🏥`;
+            
+            const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+            
+            showAlert('WhatsApp opened for broadcast message', 'success');
+        }
+        
+        function sendHealthTip() {
+            const tips = [
+                'Drink at least 8 glasses of water daily for optimal health! 💧',
+                'Exercise for 30 minutes daily to keep your heart healthy! ❤️',
+                'Eat fruits and vegetables for essential vitamins and minerals! 🥗',
+                'Get 7-9 hours of sleep for better mental and physical health! 😴'
+            ];
+            
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            const message = `💡 *NAMMA CLINIC - Daily Health Tip*\n\n${randomTip}\n\n👨⚕️ *From Dr. PRABHU CHANDRA N.M*\n\n📞 Book appointment: +91 9448049152\n🏥 Namma Clinic, Vijayanagar`;
+            
+            const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+            
+            showAlert('Health tip WhatsApp message opened', 'success');
+        }
+        
+        function sendClinicUpdate() {
+            const message = `📢 *NAMMA CLINIC - Important Update*\n\nDear Patients,\n\nWe are committed to providing you the best healthcare services.\n\n🏥 *Services Available:*\n• General Consultation\n• Health Check-ups\n• Diabetes Management\n• Hypertension Care\n\n📞 *Contact:* +91 9448049152\n📍 *Address:* 97, 4th Main Rd, Vijayanagar, Bengaluru\n\nThank you for trusting Namma Clinic! 🏥`;
+            
+            const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+            
+            showAlert('Clinic update WhatsApp message opened', 'success');
+        }
+
+        // Health tips rotation
+        function rotateHealthTips() {
+            const tips = [
+                "Drink at least 8 glasses of water daily to keep your body hydrated and maintain optimal health.",
+                "Regular exercise for 30 minutes daily can reduce the risk of chronic diseases by up to 50%.",
+                "Eat a rainbow of fruits and vegetables to ensure you get all essential vitamins and minerals.",
+                "Get 7-9 hours of quality sleep each night for better mental and physical health.",
+                "Practice deep breathing exercises to reduce stress and improve mental well-being.",
+                "Wash your hands frequently to prevent the spread of infections and diseases.",
+                "Schedule regular health check-ups to catch potential health issues early."
+            ];
+            
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById('daily-health-tip').textContent = randomTip;
+        }
+
+
+    </script>
+    
+    <!-- Tesseract.js for OCR -->
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+    <script>
+    // OCR Processing Function
+    async function processImageWithOCR(file) {
+        const progressDiv = document.getElementById('ocr-progress');
+        const resultDiv = document.getElementById('report-result');
+        
+        progressDiv.innerHTML = '<div style="text-align: center; padding: 2rem;"><i class="fas fa-eye fa-spin" style="font-size: 2rem; color: var(--primary-color);"></i><br><br>Reading text from image...</div>';
+        
+        try {
+            const { data: { text } } = await Tesseract.recognize(file, 'eng', {
+                logger: m => {
+                    if (m.status === 'recognizing text') {
+                        const progress = Math.round(m.progress * 100);
+                        progressDiv.innerHTML = `<div style="text-align: center; padding: 2rem;"><i class="fas fa-eye fa-spin" style="font-size: 2rem; color: var(--primary-color);"></i><br><br>Reading text: ${progress}%<br><div style="width: 200px; height: 10px; background: #e2e8f0; border-radius: 5px; margin: 1rem auto; overflow: hidden;"><div style="width: ${progress}%; height: 100%; background: var(--primary-color); transition: width 0.3s;"></div></div></div>`;
+                    }
+                }
+            });
+            
+            if (text && text.trim().length > 10) {
+                progressDiv.innerHTML = '<div style="text-align: center; padding: 1rem; color: var(--success-color);"><i class="fas fa-check-circle"></i> Text extracted successfully! Generating summary...</div>';
+                
+                // Now summarize the extracted text
+                await summarizeExtractedText(text);
+            } else {
+                progressDiv.innerHTML = '<div style="color: var(--danger-color); padding: 1rem; text-align: center;"><i class="fas fa-exclamation-triangle"></i> Could not extract readable text from image.<br><br><strong>Tips:</strong><br>• Use clear, high-quality images<br>• Ensure good lighting<br>• Avoid blurry or tilted photos<br><br><button class="btn btn-outline" onclick="showTextInput()">Type Text Manually</button></div>';
+            }
+        } catch (error) {
+            console.error('OCR Error:', error);
+            progressDiv.innerHTML = '<div style="color: var(--danger-color); padding: 1rem; text-align: center;"><i class="fas fa-times-circle"></i> Error processing image.<br><br><button class="btn btn-outline" onclick="showTextInput()">Type Text Manually</button></div>';
+        }
+    }
+    
+    async function summarizeExtractedText(extractedText) {
+        const resultDiv = document.getElementById('report-summary-content');
+        resultDiv.innerHTML = '<div style="text-align: center; padding: 2rem;"><i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--success-color);"></i><br><br>Generating summary...</div>';
+        
+        try {
+            const response = await fetch('/api/summarize-report', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ reportText: extractedText })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Show extracted text first
+                const extractedSection = `<div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;"><h4><i class="fas fa-file-alt"></i> Extracted Text:</h4><div style="max-height: 200px; overflow-y: auto; font-size: 0.9em; color: #64748b;">${extractedText}</div></div>`;
+                
+                resultDiv.innerHTML = extractedSection + '<h4><i class="fas fa-magic"></i> AI Summary:</h4><pre style="white-space: pre-wrap; font-family: inherit;">' + result.summary + '</pre>';
+                
+                // Hide progress
+                document.getElementById('ocr-progress').innerHTML = '';
+            } else {
+                resultDiv.innerHTML = '<p style="color: var(--danger-color);">Error generating summary. Please try again.</p>';
+            }
+        } catch (error) {
+            console.error('Summary error:', error);
+            resultDiv.innerHTML = '<p style="color: var(--danger-color);">Network error. Please check your connection.</p>';
+        }
+    }
+    </script>
+</body>
+</html>
