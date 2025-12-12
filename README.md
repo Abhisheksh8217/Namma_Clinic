@@ -1,5 +1,5 @@
 # Namma Clinic Healthcare Management System
-
+website walk through : https://civic-issues-reporting-rnd-tracking-nu.vercel.app/
 🏥 **Complete Healthcare Management System** with AI-powered features
 
 ## Features
@@ -11,9 +11,9 @@
 - 👨‍⚕️ **Patient & Admin Portals**
 
 
-## Live Demo  (Netlify Deployed sample for frontend only) :
-    Netlify Deployed sample for frontend only :
-🌐 **Website:** [https://691ea200b8c7f0e40bc0d230--benevolent-pavlova-5f5b8d.netlify.app/]
+## Live Demo  (Vercel Deployed ) :
+    
+🌐 **Website:** [https://civic-issues-reporting-rnd-tracking-nu.vercel.app/]
 
 ## Clinic Details
 - **Doctor:** Dr. PRABHU CHANDRA N.M (General Physician)
